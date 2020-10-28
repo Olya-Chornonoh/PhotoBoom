@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mysql2": "^2.2.5"
+    "dotenv": "^8.2.0",
+    "mysql2": "^2.2.5",
+    "pino": "^6.7.0",
+    "sequelize": "^6.3.5"
   }
 }
