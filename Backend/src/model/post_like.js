@@ -3,20 +3,14 @@ const database = require('../mysql/sequelize');
 const { Sequelize, DataTypes, Model } = require('sequelize');
 
 const User = require('./user'); 
+const Post = require('./post');
 
-class Post extends Model {}
+class PostLike extends Model {}
 
-Post.init({
-
+PostLike.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true
-    },
-    link: {
-        type: DataTypes.STRING
-    },
-    description: {
-        type: DataTypes.STRING
     },
     user_id: {
         type: DataTypes.INTEGER,
@@ -24,13 +18,20 @@ Post.init({
             model: User,
         key: 'id',
         },
+    },
+    post_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: Post,
+            key: 'id',
+        },
     }
 }, {
     sequelize: database,
-    tableName: 'post',
-    modelName: 'Post'
-});
+    tableName: 'post_like',
+    modelName: 'PostLike'
+})
 
-console.log(Post === database.models.Post); // true
+console.log(PostLike === database.models.PostLike); 
 
-module.exports = Post;
+module.exports = PostLike;
