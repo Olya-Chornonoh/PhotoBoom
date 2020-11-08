@@ -9,6 +9,10 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:OlyaLarchenko/PhotoBoom.git"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~10.1.6",
