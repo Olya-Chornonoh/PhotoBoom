@@ -8,6 +8,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { MainComponent } from './pages/main/main.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { MainComponent } from './pages/main/main.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatIconModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
