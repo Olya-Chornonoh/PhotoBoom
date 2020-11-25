@@ -1,4 +1,4 @@
-const database = require('../mysql/sequelize');
+const database = require('../loaders/sequelize');
 
 const { Sequelize, DataTypes, Model } = require('sequelize');
 
@@ -7,18 +7,19 @@ class User extends Model {}
 User.init({
   // Model attributes are defined here
   id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true
+    type: DataTypes.INTEGER,
+    primaryKey: true
   },
   email: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    unique: true,
   },
   login: {
-    type: DataTypes.STRING
-    // allowNull defaults to true
+    type: DataTypes.STRING,
+    unique: true,
   },
   passwd: {
-      type: DataTypes.STRING
+    type: DataTypes.STRING
   }
 }, {
   // Other model options go here
@@ -26,8 +27,5 @@ User.init({
   tableName: 'users',
   modelName: 'User' // We need to choose the model name
 });
-
-// the defined model is the class itself
-console.log(User === database.models.User); // true
 
 module.exports = User;

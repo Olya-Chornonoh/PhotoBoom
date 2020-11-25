@@ -1,5 +1,6 @@
-// const process = require('process');
-// const {URL} = require('url');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 // Database connection can also be configured by single url
 // Url format: <dialect>://<username>:<password>@<hostname>:<port>/<database>
@@ -20,6 +21,7 @@ if (process.env.DB_URL) {
 }
 
 const config = {
+  port: process.env.PORT || 3000,
 
   // Database configuration obtained from container environment
   database: {
@@ -36,6 +38,10 @@ const config = {
     level: process.env.LOG_LEVEL || 'debug',
   },
 
+  jwt: { // JSON Web token
+    secret: process.env.JWT_SECRET || 'secret',
+    issuer: process.env.JWT_ISSUER || 'photo_boom_api',
+  },
 };
 
 module.exports = config;

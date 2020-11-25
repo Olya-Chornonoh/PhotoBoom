@@ -1,4 +1,4 @@
-const database = require('../mysql/sequelize');
+const database = require('../loaders/sequelize');
 
 const { Sequelize, DataTypes, Model } = require('sequelize');
 
@@ -30,8 +30,6 @@ PostLike.init({
     sequelize: database,
     tableName: 'post_like',
     modelName: 'PostLike'
-})
-
-console.log(PostLike === database.models.PostLike); 
+});
 
 module.exports = PostLike;
