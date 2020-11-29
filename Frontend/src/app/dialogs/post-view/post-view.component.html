@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>{{data.post.User.login}}</h1>
+<div mat-dialog-content class="post">
+  <mat-divider></mat-divider>
+
+  <img height="150px" src="{{apiUrl + '/' + data.post.link}}">
+
+  <mat-divider></mat-divider>
+
+  <p>{{data.post.description}}</p>
+
+  <mat-divider></mat-divider>
+
+  <mat-list>
+    <app-comment *ngFor="let comment of comments" [item]="comment"></app-comment>
+  </mat-list>
+
+  <mat-dialog-actions class="post_actions">
+    <button mat-icon-button>
+      <mat-icon>favorite_border</mat-icon>
+      {{data.post.likes_count}}
+    </button>
+    <button mat-icon-button>
+      <mat-icon>comment</mat-icon>
+      {{data.post.comment_count}}
+    </button>
+  </mat-dialog-actions>
+</div>

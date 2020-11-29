@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { PostCreateComponent } from 'src/app/dialogs/post-create/post-create.component';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +12,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog,
+    private router: Router,
+    private auth: AuthService,
+    private api: ApiService) { }
 
   ngOnInit(): void {
+    if (!this.auth.getAccessToken()) {
+      this.router.navigate(['/signin']);
+    }
   }
 
+  logOut() {
+    this.auth.deleteAccessToken();
+    this.router.navigate(['signin']);
+  }
+
+  createPost() {
+    const dialogRef = this.dialog.open(PostCreateComponent, {
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
+  }
 }

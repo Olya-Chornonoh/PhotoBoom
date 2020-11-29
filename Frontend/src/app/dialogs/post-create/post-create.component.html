@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Create post</h1>
+<div mat-dialog-content class="content">
+  <mat-form-field appearance="outline" class="field">
+    <mat-label *ngIf="selectedFile; else newFile">{{selectedFile.name}}</mat-label>
+    <ng-template #newFile>
+      <mat-label>Choose file</mat-label>
+    </ng-template>
+    <input matInput disabled>
+    <button mat-icon-button matSuffix (click)="fileInput.click()">
+      <mat-icon>attach_file</mat-icon>
+    </button>
+    <input hidden (change)="selectFile($event)" #fileInput type="file" id="file" accept="image/*" required>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="field">
+    <mat-label>Description</mat-label>
+    <input matInput type="text" name="description" placeholder="Description" [formControl]="description" required>
+    <mat-error *ngIf="description.hasError('required')">
+      Description is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-stroked-button (click)="onCancel()">Cancel</button>
+  <button mat-flat-button color="primary" [disabled]="!selectedFile && description.invalid"
+    (click)="onSubmit()">Submit</button>
+</div>

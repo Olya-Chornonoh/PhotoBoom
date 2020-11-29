@@ -8,7 +8,7 @@ const express = require('express');
 const {check} = require('express-validator');
 const { NotFound } = require('http-errors');
 
-const router = express.Router();
+const router = express.Router({mergeParams: true});
 
 function searchUsers(req, res, next) {
   const login = req.query.login;

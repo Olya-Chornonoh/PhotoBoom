@@ -7,7 +7,7 @@ const {NotFound} = require('http-errors');
 
 const express = require('express');
 
-const router = express.Router();
+const router = express.Router({mergeParams: true});
 
 function create(req, res, next) {
   postLike.create(req['userId'], req.params.postId)

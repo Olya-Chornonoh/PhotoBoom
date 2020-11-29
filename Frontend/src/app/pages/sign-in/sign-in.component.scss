@@ -1,0 +1,27 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  width: 300px;
+  margin: auto;
+}
+
+.signin_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+
+  &_data {
+    width: 300px;
+  }
+
+  &_continue {
+    align-self: flex-end;
+  }
+}

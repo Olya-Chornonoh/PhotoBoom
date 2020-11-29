@@ -8,7 +8,8 @@ User.init({
   // Model attributes are defined here
   id: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
   email: {
     type: DataTypes.STRING,
@@ -18,7 +19,7 @@ User.init({
     type: DataTypes.STRING,
     unique: true,
   },
-  passwd: {
+  password: {
     type: DataTypes.STRING
   }
 }, {

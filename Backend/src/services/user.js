@@ -8,7 +8,7 @@ class UserService {
     // hash password with bcrypt
     const password = await bcrypt.hash(request.password, 10);
 
-    const user = await User.create({...request, passwd: password});
+    const user = await User.create({...request, password});
 
     return user;
   }

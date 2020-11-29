@@ -38,7 +38,7 @@ class AuthService {
     // user was found
     // continue comparing password
     const same =
-        await bcrypt.compare(request.password, String(user.get('passwd')));
+        await bcrypt.compare(request.password, String(user.get('password')));
 
     if (same) {
       const token = this.sign({user_id: String(user.get('id'))}, expiresIn);

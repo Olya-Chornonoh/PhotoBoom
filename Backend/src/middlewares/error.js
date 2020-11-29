@@ -9,6 +9,10 @@ const logger = require('../loaders/logger');
 function errorHandler(err, _req, res, _next) {
   let error = err;
 
+  if (!error.status) {
+    error.status = 500;
+  }
+
   // log internal errors
   if (error.status >= 500) {
     logger.error(error);

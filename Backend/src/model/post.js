@@ -2,14 +2,15 @@ const database = require('../loaders/sequelize');
 
 const { Sequelize, DataTypes, Model } = require('sequelize');
 
-const User = require('./user'); 
+const User = require('./user');
 
-class Post extends Model {}
+class Post extends Model { }
 
 Post.init({
 	id: {
 		type: DataTypes.INTEGER,
-		primaryKey: true
+		primaryKey: true,
+		autoIncrement: true
 	},
 	link: {
 		type: DataTypes.STRING
@@ -29,5 +30,7 @@ Post.init({
 	tableName: 'post',
 	modelName: 'Post'
 });
+
+Post.belongsTo(User, { foreignKey: 'user_id' });
 
 module.exports = Post;

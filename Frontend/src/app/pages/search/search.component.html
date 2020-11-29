@@ -1,0 +1,24 @@
+<div class="container">
+  <mat-card>
+    <mat-card-content class="search-bar">
+      <mat-form-field appearance="outline" class="search-bar-field">
+        <mat-label>Login</mat-label>
+        <input matInput type="text" name="search" placeholder="Login to search" [formControl]="loginSearch">
+      </mat-form-field>
+      <div class="search-bar-btn">
+        <button mat-flat-button color="primary" (click)="searchUsers()">
+          <mat-icon>search</mat-icon>
+          Search
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card style="margin-top: 16px;" *ngIf="users && users.length">
+    <mat-card-title>Found users:</mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <app-user *ngFor="let user of users" [item]="user"></app-user>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -10,7 +10,7 @@ const comment = require('./comment');
 const like = require('./post_like');
 
 function setup(app) {
-  app.use(express.static('Photo'));
+  app.use('/uploads', express.static('uploads'));
 
   app.use('/auth', auth);
 

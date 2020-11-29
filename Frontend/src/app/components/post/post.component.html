@@ -1,0 +1,24 @@
+<mat-card class="post">
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon>account_circle</mat-icon>
+    </div>
+    <mat-card-title>{{item.User.login}}</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <img height="150px" mat-card-image src="{{apiUrl + '/' + item.link}}">
+  <mat-divider></mat-divider>
+  <mat-card-content class="post_content">
+    <p>{{item.description}}</p>
+  </mat-card-content>
+  <mat-card-actions class="post_actions">
+    <button mat-icon-button (click)="like()">
+      <mat-icon>favorite_border</mat-icon>
+      {{item.likes_count}}
+    </button>
+    <button mat-icon-button (click)="openComments()">
+      <mat-icon>comment</mat-icon>
+      {{item.comment_count}}
+    </button>
+  </mat-card-actions>
+</mat-card>

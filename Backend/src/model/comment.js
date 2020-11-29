@@ -10,7 +10,8 @@ class Comment extends Model {}
 Comment.init({
 	id: {
 		type: DataTypes.INTEGER,
-		primaryKey: true
+		primaryKey: true,
+    autoIncrement: true
 	},
 	user_id: {
 		type: DataTypes.INTEGER,
@@ -34,5 +35,8 @@ Comment.init({
 	tableName: "comment",
 	modelName: 'Comment'
 });
+
+Comment.belongsTo(User, { foreignKey: 'user_id' });
+Comment.belongsTo(Post, { foreignKey: 'post_id' });
 
 module.exports = Comment;

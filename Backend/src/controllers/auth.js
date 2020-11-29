@@ -6,7 +6,7 @@ const auth = new AuthService();
 const express = require('express');
 const {check} = require('express-validator');
 
-const router = express.Router();
+const router = express.Router({mergeParams: true});
 
 const authEmailValidators = [
   check('email').trim().isEmail(),

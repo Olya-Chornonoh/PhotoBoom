@@ -1,0 +1,11 @@
+.post {
+  img {
+    object-fit: cover;
+  }
+
+  &_actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+}

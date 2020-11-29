@@ -2,14 +2,29 @@ const PostService = require('../services/post');
 const validate = require('../middlewares/validate');
 const auth = require('../middlewares/auth');
 const multer = require('multer');
+const shortid = require('shortid');
+const mime = require('mime-types');
 
 const post = new PostService();
-const upload = multer({dest: 'Photo'});
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: function (req,file,cb) {
+      cb(null, 'uploads');
+    },
+    filename: function (req,file,cb) {
+      /* generates a "unique" name - not collision proof but unique enough for small sized applications */
+      let id = shortid.generate();
+      /* need to use the file's mimetype because the file name may not have an extension at all */
+      let ext = mime.extension(file.mimetype);
+      cb(null, `${id}.${ext}`);
+    }
+  }),
+});
 
 const express = require('express');
 const { NotFound } = require('http-errors');
 
-const router = express.Router();
+const router = express.Router({mergeParams: true});
 
 function getAll(req, res, next) {
   const limit = Number(req.query.limit) || 10;
@@ -48,7 +63,7 @@ function getPostsUser(req, res, next) {
 
 function create(req, res, next) {
   if (req.file) {
-    req.body.link = req.file.path;
+    req.body.link = req.file.destination + '/' + req.file.filename;
   }
 
   post.create(req['userId'], req.body)

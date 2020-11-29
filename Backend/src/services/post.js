@@ -5,15 +5,23 @@ const Post = require('../model/post');
 const likesCount = [
   literal(
       '(select count(*) ' +
-      'from "post_like" ' +
-      'where "post_like"."post_id" = "Post"."id")'),
+      'from `post_like` ' +
+      'where `post_like`.`post_id` = `Post`.`id`)'),
   'likes_count',
+];
+
+const commentCount = [
+  literal(
+      '(select count(*) ' +
+      'from `comment` ' +
+      'where `comment`.`post_id` = `Post`.`id`)'),
+  'comment_count',
 ];
 
 class PostService {
   getAll(limit, offset) {
     return Post.findAndCountAll({
-      attributes: { include: [likesCount] },
+      attributes: { include: [likesCount, commentCount] },
       include: [User],
       limit: limit,
       offset: offset,
@@ -23,7 +31,7 @@ class PostService {
   getAllForUser(userId, limit, offset) {
     return Post.findAndCountAll({
       user_id: userId,
-      attributes: { include: [likesCount] },
+      attributes: { include: [likesCount, commentCount] },
       include: [User],
       limit: limit,
       offset: offset,
@@ -33,7 +41,7 @@ class PostService {
   get(postId) {
     return Post.findOne({
       where: {id: postId},
-      attributes: { include: [likesCount] },
+      attributes: { include: [likesCount, commentCount] },
       include: [User],
     });
   }

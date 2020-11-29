@@ -1,31 +1,35 @@
 <div class="main">
-    <div class="main_photo_boom">
-        <a href="#" class="signup_header_title_link">Photo Boom</a>
+    <mat-toolbar color="primary">
+        <span>Photo Boom</span>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="logOut()">
+            <mat-icon>logout</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <div class="main-content">
+        <router-outlet></router-outlet>
     </div>
-</div>
 
-<div class="maain_mat_toolbar">
-    <mat-toolbar class="buttons">
-
-        <button name="allFeed">
+    <mat-toolbar class="main-bottom-nav">
+        <button mat-icon-button name="allFeed" routerLink="feed">
             <mat-icon aria-hidden="false" aria-label="allFeed">apps</mat-icon>
         </button>
 
-        <button name="search">
+        <button mat-icon-button name="search" routerLink="search">
             <mat-icon aria-hidden="false" aria-label="search">search</mat-icon>
         </button>
-        
-        <button name="dowload">
-            <mat-icon aria-hidden="false" aria-label="dowload">add_a_photo</mat-icon>
+
+        <button mat-icon-button name="create" (click)="createPost()">
+            <mat-icon aria-hidden="false" aria-label="create">add_a_photo</mat-icon>
         </button>
 
-        <button name="like">
+        <!-- <button mat-icon-button name="like">
             <mat-icon aria-hidden="false" aria-label="like">favorite_border</mat-icon>
-        </button>
+        </button> -->
 
-        <button name="myProfile">
+        <button mat-icon-button name="myProfile" routerLink="home">
             <mat-icon aria-hidden="false" aria-label="homeIcon">home</mat-icon>
         </button>
-
     </mat-toolbar>
 </div>

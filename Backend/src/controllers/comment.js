@@ -7,7 +7,7 @@ const comment = new CommentService();
 const express = require('express');
 const {NotFound} = require('http-errors');
 
-const router = express.Router();
+const router = express.Router({mergeParams: true});
 
 function getAll(req, res, next){
   const limit = Number(req.query.limit) || 10;
