@@ -1,27 +1,25 @@
-<h1 mat-dialog-title>{{data.post.User.login}}</h1>
 <div mat-dialog-content class="post">
-  <mat-divider></mat-divider>
+  <img class="post_img" style="object-fit: cover;" src="{{apiUrl + '/' + data.post.link}}">
+  <div class="post_content">
+    <h1>{{data.post.User.login}}</h1>
+    <p>{{data.post.description}}</p>
 
-  <img height="150px" src="{{apiUrl + '/' + data.post.link}}">
+    <mat-divider></mat-divider>
 
-  <mat-divider></mat-divider>
+    <div class="post_actions">
+      <button mat-icon-button (click)="likeToggle()">
+        <mat-icon *ngIf="!userLiked">favorite_border</mat-icon>
+        <mat-icon *ngIf="userLiked">favorite</mat-icon>
+        {{data.post.likes_count}}
+      </button>
+      <app-comment-create class="post_actions_comment" [postId]="data.post.id" (commentAdd)="onCommentAdd($event)"></app-comment-create>
+    </div>
 
-  <p>{{data.post.description}}</p>
+    <p>Comments</p>
 
-  <mat-divider></mat-divider>
+    <mat-list>
+      <app-comment *ngFor="let comment of comments" [item]="comment" (commentDelete)="onCommentDelete($event)"></app-comment>
+    </mat-list>
 
-  <mat-list>
-    <app-comment *ngFor="let comment of comments" [item]="comment"></app-comment>
-  </mat-list>
-
-  <mat-dialog-actions class="post_actions">
-    <button mat-icon-button>
-      <mat-icon>favorite_border</mat-icon>
-      {{data.post.likes_count}}
-    </button>
-    <button mat-icon-button>
-      <mat-icon>comment</mat-icon>
-      {{data.post.comment_count}}
-    </button>
-  </mat-dialog-actions>
+  </div>
 </div>

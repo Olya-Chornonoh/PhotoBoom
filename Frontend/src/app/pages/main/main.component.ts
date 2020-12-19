@@ -21,11 +21,16 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     if (!this.auth.getAccessToken()) {
       this.router.navigate(['/signin']);
+    } else {
+      this.api.getAuthorizedUser().subscribe(user => {
+        this.auth.setUserId(user.id.toString());
+      });
     }
   }
 
   logOut() {
     this.auth.deleteAccessToken();
+    this.auth.deleteUserId();
     this.router.navigate(['signin']);
   }
 

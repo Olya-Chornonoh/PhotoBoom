@@ -2,4 +2,7 @@
   <mat-icon mat-list-icon>account_circle</mat-icon>
   <div mat-line>{{item.User.login}}</div>
   <div mat-line>{{item.comment}}</div>
+  <button mat-icon-button *ngIf="canDelete" (click)="deleteComment()">
+    <mat-icon>close</mat-icon>
+  </button>
 </mat-list-item>

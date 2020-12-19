@@ -33,6 +33,7 @@ import { CommentComponent } from './components/comment/comment.component';
 import { PostCreateComponent } from './dialogs/post-create/post-create.component';
 import { PostViewComponent } from './dialogs/post-view/post-view.component';
 import { CommonModule } from '@angular/common';
+import { CommentCreateComponent } from './components/comment-create/comment-create.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { CommonModule } from '@angular/common';
     PostCreateComponent,
     PostViewComponent,
     PagesUserComponent,
+    CommentCreateComponent,
   ],
   imports: [
     CommonModule,

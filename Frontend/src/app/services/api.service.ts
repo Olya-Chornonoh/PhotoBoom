@@ -36,6 +36,10 @@ export class ApiService {
     return this.http.get<User>(environment.apiUrl + '/users/' + userId);
   }
 
+  getAuthorizedUser(): Observable<User> {
+    return this.http.get<User>(environment.apiUrl + '/users/me');
+  }
+
   getAllPosts(limit: number = 10000, offset: number = 0): Observable<Paged<Post>> {
     return this.http.get<Paged<Post>>(environment.apiUrl + '/posts',{
       params:{
@@ -92,6 +96,15 @@ export class ApiService {
   updateComment(postId: number, commentId: number, comment: string): Observable<Comment>{
     return this.http.put<Comment>(environment.apiUrl + '/posts/' + postId + '/comments/' + commentId, {
       comment,
+    });
+  }
+
+  getLikes(postId: number, limit: number = 10000, offset: number = 0): Observable<Paged<PostLike>>{
+    return this.http.get<Paged<PostLike>>(environment.apiUrl + '/posts/' + postId + '/likes', {
+      params:{
+        limit: limit.toString(),
+        offset: offset.toString(),
+      }
     });
   }
 

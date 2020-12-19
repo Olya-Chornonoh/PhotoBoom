@@ -25,7 +25,8 @@ export class PostComponent implements OnInit {
 
   openComments() {
     const dialogRef = this.dialog.open(PostViewComponent, {
-      width: '400px',
+      width: '800px',
+      // height: '90vh',
       data: {
         post: this.item,
       }
