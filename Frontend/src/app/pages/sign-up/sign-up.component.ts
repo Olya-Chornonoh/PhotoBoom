@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -23,7 +24,7 @@ export class SignUpComponent implements OnInit {
 
   hidePassword = true;
 
-  constructor(private fb: FormBuilder, private api: ApiService) { }
+  constructor(private fb: FormBuilder, private api: ApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -41,5 +42,9 @@ export class SignUpComponent implements OnInit {
     this.api.register(email, login, password).subscribe(user => {
       console.log(user);
     });
+  }
+
+  signIn(){
+    this.router.navigate(['/signin']);
   }
 }

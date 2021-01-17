@@ -21,6 +21,13 @@ mat-card {
     width: 300px;
   }
 
+  &_buttons {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
   &_continue {
     align-self: flex-end;
   }
