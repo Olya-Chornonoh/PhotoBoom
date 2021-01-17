@@ -11,6 +11,8 @@
 
   &-bottom-nav {
     display: flex;
+    position: fixed;
+    bottom: 0;
     justify-content: space-evenly;
     align-items: center;
     z-index: 2;
