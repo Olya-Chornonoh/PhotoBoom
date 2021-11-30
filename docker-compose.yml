@@ -1,0 +1,62 @@
+version: "3.7"
+
+# Services configuration section
+services:
+  # API service
+  backend:
+    build: ./Backend
+    depends_on:
+      - database
+    environment:
+      # Environment variables for database configuration
+      DB_URL: mysql://photo_boom_user:15082122@database:3306/photo_boom
+      LOG_LEVEL: debug
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+    # Attach volume for data persistent storage
+    volumes:
+      # volume, where data will be stored
+      - photo_boom_uploads:/app/uploads
+    deploy:
+      resources:
+        # limits for CPU and memory usage
+        limits:
+          cpus: '0.50'
+          memory: 250M
+      # restart on failure for swarm mode
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 50s
+    # restart on failure for compose mode
+    restart: on-failure
+
+  # Web app service
+  frontend:
+    build: ./Frontend
+    ports:
+      - "8080:80"
+
+  # Database service
+  database:
+    image: mysql:8.0.18
+    command: --default-authentication-plugin=mysql_native_password
+    # Environment variables for database
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: photo_boom
+      MYSQL_USER: photo_boom_user
+      MYSQL_PASSWORD: 15082122
+    # Attach volume for data persistent storage
+    volumes:
+      # volume, where data will be stored
+      - photo_boom_db:/var/lib/mysql
+      # volume for storing initialization scripts
+      # - ./Databaset:/docker-entrypoint-initdb.d
+
+# Volumes configuration section
+volumes:
+  photo_boom_db:
+  photo_boom_uploads:
